@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for pet in pets %}
+        <img src="{{ pet.photo.url }}" width="250" height="250" alt="{{ pet.city }}">
+        <p>{{ pet.city }}</p>
+        <p>{{ pet.begin_date }}</p>
+    {% endfor %}
+</body>
+</html>
