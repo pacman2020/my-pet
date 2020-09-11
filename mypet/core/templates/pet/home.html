@@ -1,15 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %} lista de pets {% endblock %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-4 p-3">
     {% for pet in pets %}
-        <img src="{{ pet.photo.url }}" width="250" height="250" alt="{{ pet.city }}">
-        <p>{{ pet.city }}</p>
-        <p>{{ pet.begin_date }}</p>
+    <div class="col mb-4">
+      <div class="card">
+        <img src="{{ pet.photo.url }}" width="260" height="140" class="card-img-top">
+        <div class="card-body">
+          <p><strong>Cidade: </strong>{{ pet.city }}</p>
+          <p>{{ pet.bigen_date }}</p>
+          <a href="#">veja mais ...</a>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-</body>
-</html>
+  </div>
+  
+  <div class="pagination d-flex justify-content-center p-3">
+    <span class="step-link">
+      {% if products.has_previous %}
+      <a href="?page={{ pets.previous_page_number }}">voltar</a>
+      {% endif %}
+  
+      <span class="current">
+        {{ pets.number }} | {{  pets.paginator.num_pages }}
+      </span>
+  
+      {% if products.has_next %}
+      <a href="?page={{ pets.next_page_number }}">proximo</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock %}
