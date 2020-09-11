@@ -9,6 +9,7 @@ class Pet(models.Model):
     email = models.EmailField()
     active = models.BooleanField(default=True)
     description = models.TextField()
+    photo = models.ImageField(upload_to='media', null=True)
     begin_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
