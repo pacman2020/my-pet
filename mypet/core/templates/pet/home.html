@@ -11,7 +11,7 @@
         <div class="card-body">
           <p><strong>Cidade: </strong>{{ pet.city }}</p>
           <p>{{ pet.bigen_date }}</p>
-          <a href="#">veja mais ...</a>
+          <a href="{% url 'detail_pet' pet.id %}">veja mais ...</a>
         </div>
       </div>
     </div>
