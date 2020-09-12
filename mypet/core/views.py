@@ -47,3 +47,6 @@ def detail_pet(request, pk):
     pet = get_object_or_404(Pet, pk=pk)
     data = {'pet': pet}
     return render(request, 'pet/detail_pet.html', data)
+
+def mew_pet(request):
+    return render(request, 'pet/new_pet.html')
