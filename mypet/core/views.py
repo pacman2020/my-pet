@@ -52,16 +52,27 @@ def detail_pet(request, pk):
 def new_pet(request):
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
-        user = request.user
-        print('--->', user)
 
         if form.is_valid():
             pet = form.save(commit=False)
-            print('--->', pet)
 
-            pet.user_id = user
+            pet.user_id = request.user
             pet.save()
             return redirect('detail_pet', pk=pet.pk)
     else:
         form = PetForm()
+    return render(request, 'pet/new_pet.html', {'form': form})
+
+def edit_pet(request,pk):
+    pet = get_object_or_404(Pet, pk=pk, user_id= request.user)
+
+    if request.method == 'POST':
+        form = PetForm(request.POST, instance=pet)
+        if form.is_valid():
+            pet = form.save(commit=False)
+            # pet.user_id = request.user
+            pet.save()
+            return redirect('detail_pet', pk=pet.pk)
+    else:
+        form = PetForm(instance=pet)
     return render(request, 'pet/new_pet.html', {'form': form})    
