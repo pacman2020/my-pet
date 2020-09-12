@@ -5,5 +5,5 @@ class PetForm(forms.ModelForm):
     class Meta:
         model = Pet
         fields = (
-            'user_id','city','phone','email','description','photo',
-            )
+            'city','phone','email','description','photo',
+        )
