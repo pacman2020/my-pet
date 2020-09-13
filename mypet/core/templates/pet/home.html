@@ -18,9 +18,9 @@
     {% endfor %}
   </div>
   
-  <div class="pagination d-flex justify-content-center p-3">
+  <div class="pagination d-flex justify-content-center">
     <span class="step-link">
-      {% if products.has_previous %}
+      {% if pets.has_previous %}
       <a href="?page={{ pets.previous_page_number }}">voltar</a>
       {% endif %}
   
@@ -28,7 +28,7 @@
         {{ pets.number }} | {{  pets.paginator.num_pages }}
       </span>
   
-      {% if products.has_next %}
+      {% if pets.has_next %}
       <a href="?page={{ pets.next_page_number }}">proximo</a>
       {% endif %}
     </span>

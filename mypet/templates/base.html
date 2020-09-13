@@ -20,18 +20,25 @@
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'my_pets' %}">meus pets</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'new_pet' %}">novo pet</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">sair</a>
-                </li>
+                {% if user.is_authenticated %}
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'my_pets' %}">meus pets</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'new_pet' %}">novo pet</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">sair</a>
+                  </li>
+                  <span class="navbar-text mr-4 rounded bg-success p-2" >{{ user.username }}</span>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">logar</a>
+                  </li>
+                {% endif %}
               </ul>
               <form class="form-inline my-2 my-lg-0" method="POST">{% csrf_token %}
                 <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
