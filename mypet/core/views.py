@@ -48,9 +48,12 @@ def my_pets(request):
     return render(request, 'pet/home.html', data)
 
 def detail_pet(request, pk):
-    pet = get_object_or_404(Pet, pk=pk)
-    data = {'pet': pet}
-    return render(request, 'pet/detail_pet.html', data)
+    try:
+        pet = get_object_or_404(Pet, pk=pk)
+        data = {'pet': pet}
+        return render(request, 'pet/detail_pet.html', data)
+    except :
+        return render(request ,'pet/get_404.html')
 
 @login_required
 def new_pet(request):
@@ -86,6 +89,7 @@ def edit_pet(request,pk):
 
 @login_required
 def delete_pet(request, pk):
+   
     pet = get_object_or_404(Pet, pk=pk)
     #manda mesagem de voce nao possui esse pet
     #urls para rotas que não existes
