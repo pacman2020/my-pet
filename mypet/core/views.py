@@ -3,6 +3,7 @@ from .models import Pet
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .forms import PetForm
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -58,6 +59,7 @@ def new_pet(request):
 
             pet.user_id = request.user
             pet.save()
+            messages.success(request,'criado com sucesso')
             return redirect('detail_pet', pk=pet.pk)
     else:
         form = PetForm()
@@ -71,9 +73,11 @@ def edit_pet(request,pk):
         if form.is_valid():
             pet = form.save(commit=False)
             pet.save()
+            messages.success(request,'atualizado com sucesso')
             return redirect('detail_pet', pk=pet.pk)
     else:
         form = PetForm(instance=pet)
+        # messages.error(request,'preencha todos os campos')
     return render(request, 'pet/new_pet.html', {'form': form})
 
 def delete_pet(request, pk):
@@ -81,6 +85,7 @@ def delete_pet(request, pk):
 
     if pet.user_id == request.user:
         pet.delete()
+        messages.success(request,'deletado com sucesso')
         return redirect('my_pets')
     return redirect('detail_pet', pk=pet.pk)
 

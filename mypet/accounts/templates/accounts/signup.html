@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %} register pet {% endblock %}
 {% block content %}
 <div class="p-5 d-flex justify-content-center mt-3">
     <form enctype="multipart/form-data" class="p-3 bg-success rounded" method="POST">{% csrf_token %}
