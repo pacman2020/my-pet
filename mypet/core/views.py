@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from .forms import PetForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -24,6 +25,7 @@ def home(request):
     data = {'pets': paginator.get_page(page)}
     return render(request, 'pet/home.html', data)
 
+@login_required
 def my_pets(request):
     if request.method == 'POST':
         search_pet = request.POST.get('search')
@@ -50,6 +52,7 @@ def detail_pet(request, pk):
     data = {'pet': pet}
     return render(request, 'pet/detail_pet.html', data)
 
+@login_required
 def new_pet(request):
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
@@ -65,6 +68,7 @@ def new_pet(request):
         form = PetForm()
     return render(request, 'pet/new_pet.html', {'form': form})
 
+@login_required
 def edit_pet(request,pk):
     pet = get_object_or_404(Pet, pk=pk, user_id= request.user)
 
@@ -80,13 +84,14 @@ def edit_pet(request,pk):
         # messages.error(request,'preencha todos os campos')
     return render(request, 'pet/new_pet.html', {'form': form})
 
+@login_required
 def delete_pet(request, pk):
     pet = get_object_or_404(Pet, pk=pk)
+    #manda mesagem de voce nao possui esse pet
+    #urls para rotas que não existes
 
     if pet.user_id == request.user:
         pet.delete()
         messages.success(request,'deletado com sucesso')
         return redirect('my_pets')
     return redirect('detail_pet', pk=pet.pk)
-
-    #manda mesagem de voce nao possui esse pet
