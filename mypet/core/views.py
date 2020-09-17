@@ -89,13 +89,13 @@ def edit_pet(request,pk):
 
 @login_required
 def delete_pet(request, pk):
-   
-    pet = get_object_or_404(Pet, pk=pk)
-    #manda mesagem de voce nao possui esse pet
-    #urls para rotas que não existes
+    try:
+        pet = get_object_or_404(Pet, pk=pk)
 
-    if pet.user_id == request.user:
-        pet.delete()
-        messages.success(request,'deletado com sucesso')
-        return redirect('my_pets')
-    return redirect('detail_pet', pk=pet.pk)
+        if pet.user_id == request.user:
+            pet.delete()
+            messages.success(request,'deletado com sucesso')
+            return redirect('my_pets')
+        return redirect('detail_pet', pk=pet.pk)
+    except:
+        return render(request ,'pet/get_404.html')

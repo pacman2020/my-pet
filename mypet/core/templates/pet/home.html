@@ -3,7 +3,8 @@
 {% block title %} home {% endblock %}
 
 {% block content %}
-<div class="row row-cols-1 row-cols-md-4 p-3">
+{% if pets %}
+  <div class="row row-cols-1 row-cols-md-4 p-3">
     {% for pet in pets %}
     <div class="col mb-4">
       <div class="card">
@@ -17,6 +18,9 @@
     </div>
     {% endfor %}
   </div>
+  {% else %}
+    <h2 class="text-center p-5">não pets para doaçoes</h2>
+  {% endif %}
   
   <div class="pagination d-flex justify-content-center">
     <span class="step-link">
