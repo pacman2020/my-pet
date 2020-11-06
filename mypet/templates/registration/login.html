@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 {% block title %} login pet {% endblock %}
 {% block content %}
-<div class="p-5 d-flex justify-content-center mt-3">
-    <form enctype="multipart/form-data" class="p-3 bg-success rounded" method="POST">{% csrf_token %}
+<div class="p-5 d-flex justify-content-center mt-2">
+    <form enctype="multipart/form-data" class="pl-5 pr-5 rounded" style="background-color: rgb(155, 161, 159);" method="POST">{% csrf_token %}
         <h2 class="p-3">Login Pet</h2>
-        {{ form.as_p }}
-        <div class="pb-4">
-            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+
+        <div class="d-flex flex-column">
+            <label for="">username</label>
+            {{ form.username }}
+            <label for="">password</label>
+            {{ form.password }}
+            <div class="pb-4 pt-4">
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </div>
         </div>
+
         <p><a href="{% url 'signup' %}" class="text-white">cadastre-se</a></p>
     </form>
 </div>
